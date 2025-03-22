@@ -56,7 +56,6 @@ class _VendorTestState extends State<VendorTest> {
         ],
       ),
       body: Container(
-        margin: EdgeInsets.symmetric(horizontal: 16),
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(color: Colors.white),
         child: Column(
@@ -121,17 +120,15 @@ class _VendorTestState extends State<VendorTest> {
               child: BlocBuilder<DiagnosticTestsCubit, DiagnosticTestsState>(
                 builder: (context, state) {
                   if (state is DiagnosticTestsLoading) {
-                    Center(child: _shimmerList());
+                    return _shimmerList();
                   } else if (state is DiagnosticTestListLoaded) {
                     return ListView.builder(
                       shrinkWrap: true,
-              
                       itemCount: state.tests.length,
                       itemBuilder: (context, index) {
                         final item = state.tests[index];
                         print('item:${item}');
                         return Container(
-
                           margin: EdgeInsets.only(bottom: 10),
                           padding: EdgeInsets.symmetric(
                             horizontal: 16,
@@ -156,7 +153,7 @@ class _VendorTestState extends State<VendorTest> {
                                     child: Text(
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      item?.testDetails?.testName ?? '',
+                                      "${item.testDetails?.testName ?? ''}",
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
@@ -165,33 +162,33 @@ class _VendorTestState extends State<VendorTest> {
                                       ),
                                     ),
                                   ),
-                                  IconButton.filledTonal(
-                                    visualDensity: VisualDensity.compact,
-                                    onPressed: () {},
-                                    style: ButtonStyle(
-                                      padding: MaterialStateProperty.all(
-                                        EdgeInsets.zero,
-                                      ),
-                                      shape: MaterialStateProperty.all(
-                                        CircleBorder(),
-                                      ),
-                                      backgroundColor:
-                                          MaterialStateProperty.all(
-                                            Color(0xffE5FCFC),
-                                          ),
-                                    ),
-                                    icon: Icon(
-                                      Icons.edit,
-                                      color: Colors.black,
-                                      size: 18,
-                                    ),
-                                  ),
+                                  // IconButton.filledTonal(
+                                  //   visualDensity: VisualDensity.compact,
+                                  //   onPressed: () {},
+                                  //   style: ButtonStyle(
+                                  //     padding: MaterialStateProperty.all(
+                                  //       EdgeInsets.zero,
+                                  //     ),
+                                  //     shape: MaterialStateProperty.all(
+                                  //       CircleBorder(),
+                                  //     ),
+                                  //     backgroundColor:
+                                  //         MaterialStateProperty.all(
+                                  //           Color(0xffE5FCFC),
+                                  //         ),
+                                  //   ),
+                                  //   icon: Icon(
+                                  //     Icons.edit,
+                                  //     color: Colors.black,
+                                  //     size: 18,
+                                  //   ),
+                                  // ),
                                   IconButton.filledTonal(
                                     visualDensity: VisualDensity.compact,
                                     onPressed: () {
                                       context
                                           .read<DiagnosticTestsCubit>()
-                                          .delateTests(item?.id ?? '');
+                                          .deleteTest(item.id ?? '');
                                     },
                                     style: ButtonStyle(
                                       padding: MaterialStateProperty.all(
@@ -256,41 +253,36 @@ class _VendorTestState extends State<VendorTest> {
   Widget _shimmerList() {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
-    return Container(
-      margin: EdgeInsets.symmetric(horizontal: 16),
-      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-      decoration: BoxDecoration(color: Colors.white),
-      child: ListView.builder(
-        shrinkWrap: true,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return Container(
-            margin: EdgeInsets.only(bottom: 10),
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.all(Radius.circular(4)),
-              border: Border.all(color: Color(0xffD6D6D6), width: 0.5),
-            ),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    shimmerText(120, 12, context),
-                    shimmerCircle(18, context),
-                  ],
-                ),
-                SizedBox(height: 10),
-                shimmerText(120, 12, context),
-                SizedBox(height: 14),
-                shimmerContainer(w * 0.5, 20, context),
-              ],
-            ),
-          );
-        },
-      ),
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: 10,
+      itemBuilder: (context, index) {
+        return Container(
+          margin: EdgeInsets.only(bottom: 10),
+          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(4)),
+            border: Border.all(color: Color(0xffD6D6D6), width: 0.5),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  shimmerText(120, 12, context),
+                  shimmerCircle(18, context),
+                ],
+              ),
+              SizedBox(height: 10),
+              shimmerText(120, 12, context),
+              SizedBox(height: 14),
+              shimmerContainer(w * 0.5, 20, context),
+            ],
+          ),
+        );
+      },
     );
   }
 }

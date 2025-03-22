@@ -16,12 +16,11 @@ class DiagnosticTestsInitially extends DiagnosticTestsState {}
 // Loading State
 class DiagnosticTestsLoading extends DiagnosticTestsState {}
 
-class DiagnosticTestsSaving extends DiagnosticTestsState {}
-
 // List Loaded State
 class DiagnosticTestListLoaded extends DiagnosticTestsState {
   final List<VendorGetTest> tests;
-  DiagnosticTestListLoaded(this.tests)
+  DiagnosticTestListLoaded(this.tests);
+
   @override
   List<Object?> get props => [tests];
 }

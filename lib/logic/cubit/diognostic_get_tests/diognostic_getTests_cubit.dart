@@ -25,7 +25,7 @@ class DiagnosticTestsCubit extends Cubit<DiagnosticTestsState> {
   }
 
   Future<void> addTests(List<String> testIds) async {
-    emit(DiagnosticTestsSaving());
+    emit(DiagnosticTestsLoading());
     try {
       final res = await repository.addTest(testIds);
       if (res != null) {
@@ -40,12 +40,13 @@ class DiagnosticTestsCubit extends Cubit<DiagnosticTestsState> {
   }
 
   Future<void> deleteTest(String id) async {
-    emit(DiagnosticTestsSaving());
+    emit(DiagnosticTestsLoading());
     try {
       final res = await repository.VendordelateTest(id);
       if (res != null) {
-        _currentTestsList.removeWhere((test) => test.id == id); // ✅ Remove from list
-        emit(DiagnosticTestListLoaded(List.from(_currentTestsList))); // ✅ Emit updated list
+        emit(DiagnosticTestsLoading());
+        _currentTestsList.removeWhere((test) => test.id == id);
+        emit(DiagnosticTestListLoaded(List.from(_currentTestsList)));
       } else {
         emit(DiagnosticTestsError("Failed to delete test"));
       }

@@ -88,7 +88,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
             ))
       ]),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -123,8 +123,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
               ),
               Card(
                 elevation: 4.0,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Column(
@@ -133,7 +132,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Container(
-                            padding: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                                 color: Color(0xffD2CBFF),
                                 borderRadius: BorderRadius.circular(8),
@@ -163,7 +162,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                                 color: Color(0xffFFDDA9),
                                 borderRadius: BorderRadius.circular(8),
@@ -193,7 +192,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.all(16),
+                            padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
                                 color: Color(0xffFFBBBB),
                                 borderRadius: BorderRadius.circular(8),
@@ -484,7 +483,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                       color: Color(0xff151515),
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18),
+                                      fontSize: 15),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -495,7 +494,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                       color: Color(0xffFFFFFF),
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18),
+                                      fontSize: 15),
                                 ),
                               ],
                             ),
@@ -532,7 +531,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                       color: Color(0xff151515),
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18),
+                                      fontSize: 15),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -543,7 +542,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                       color: Color(0xffFFFFFF),
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18),
+                                      fontSize: 15),
                                 ),
                               ],
                             ),
@@ -580,7 +579,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                       color: Color(0xff151515),
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18),
+                                      fontSize: 15),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -591,7 +590,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                       color: Color(0xffFFFFFF),
                                       fontFamily: 'Poppins',
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 18),
+                                      fontSize: 15),
                                 ),
                               ],
                             ),
@@ -603,89 +602,110 @@ class _VendorDashboardState extends State<VendorDashboard> {
                       ),
                       Container(
                         width: w,
-                        padding: EdgeInsets.all(10),
+                        padding: EdgeInsets.all(14),
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(color: Color(0xffE2E2E2), width: 2)),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(color: Color(0xffE2E2E2), width: 2),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 6,
+                              offset: Offset(0, 4),
+                            ),
+                          ],
+                        ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
+                            // Gradient Banner
                             Container(
-                                padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 6),
-                                decoration: BoxDecoration(
-                                  gradient: RadialGradient(colors: [
-                                    Color(0xffA788FD),
-                                    Color(0xff250878),
-                                  ]),
-                                  borderRadius: BorderRadius.circular(8),
+                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              decoration: BoxDecoration(
+                                gradient: LinearGradient(
+                                  colors: [Color(0xffA788FD), Color(0xff250878)],
+                                  begin: Alignment.topLeft,
+                                  end: Alignment.bottomRight,
                                 ),
-                                child: Text(
-                                  'Next patient',
-                                  style: TextStyle(
-                                      color: Color(0xffFFFFFF),
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Poppins',
-                                      fontSize: 12),
-                                )),
-                            SizedBox(
-                              height: 10,
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                'Next Patient',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'Poppins',
+                                  fontSize: 13,
+                                ),
+                              ),
                             ),
+                            SizedBox(height: 12),
+
                             Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                CircleAvatar(
-                                  radius: 24,
-                                  child: Image.asset('assets/person.png'),
+                                // Circular Avatar with Border
+                                Container(
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Color(0xffA788FD), width: 2),
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 26,
+                                    backgroundColor: Colors.white,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(26),
+                                      child: Image.asset(
+                                        'assets/person.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
                                 ),
-                                SizedBox(
-                                  width: 20,
-                                ),
-                                SizedBox(
-                                  width: w * 0.45,
+                                SizedBox(width: 16),
+
+                                // Patient Info
+                                Expanded(
                                   child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
                                         'Charan Konidela',
-                                        style: TextStyle(
-                                            color: Color(0xff808080),
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins',
-                                            fontSize: 14),
-                                      ),
-                                      SizedBox(
-                                        height: 8,
-                                      ),
-                                      Text(
                                         maxLines: 1,
                                         overflow: TextOverflow.ellipsis,
-                                        'MRI Scan',
                                         style: TextStyle(
-                                            color: Color(0xff808080),
-                                            fontWeight: FontWeight.w500,
-                                            fontFamily: 'Poppins',
-                                            fontSize: 14),
+                                          color: Color(0xff333333),
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 15,
+                                        ),
+                                      ),
+                                      SizedBox(height: 6),
+                                      Text(
+                                        'MRI Scan',
+                                        maxLines: 1,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: TextStyle(
+                                          color: Color(0xff666666),
+                                          fontWeight: FontWeight.w500,
+                                          fontFamily: 'Poppins',
+                                          fontSize: 13,
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
-                                Spacer(),
+                                // Appointment Time
                                 Text(
                                   '10:30 AM',
                                   style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontWeight: FontWeight.w500,
-                                      fontFamily: 'Poppins',
-                                      fontSize: 14),
-                                )
+                                    color: Color(0xff000000),
+                                    fontWeight: FontWeight.bold,
+                                    fontFamily: 'Poppins',
+                                    fontSize: 14,
+                                  ),
+                                ),
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ),
@@ -772,7 +792,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                               color: Color(0xffffffff),
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 20,
+                                              fontSize: 16,
                                             ),
                                           ),
                                         ],
@@ -843,7 +863,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                               color: Color(0xffffffff),
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 20,
+                                              fontSize: 16,
                                             ),
                                           ),
                                         ],
@@ -912,7 +932,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                             color: Color(0xffffffff),
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 16,
                                           ),
                                         ),
                                       ],
@@ -974,7 +994,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                             color: Color(0xffffffff),
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 16,
                                           ),
                                         ),
                                       ],
@@ -1042,7 +1062,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                             color: Color(0xffffffff),
                                             fontFamily: 'Poppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 16,
                                           ),
                                         ),
                                       ],
@@ -1112,7 +1132,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                               color: Color(0xffffffff),
                                               fontFamily: 'Poppins',
                                               fontWeight: FontWeight.w600,
-                                              fontSize: 20,
+                                              fontSize: 16,
                                             ),
                                           ),
                                         ],

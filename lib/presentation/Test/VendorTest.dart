@@ -131,6 +131,7 @@ class _VendorTestState extends State<VendorTest> {
                         final item = state.data.data?[index];
                         print('item:${item}');
                         return Container(
+
                           margin: EdgeInsets.only(bottom: 10),
                           padding: EdgeInsets.symmetric(
                             horizontal: 16,

@@ -4,6 +4,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revxvendor/Components/CustomAppButton.dart';
 import 'package:revxvendor/Models/SuperAdminTestsModel.dart';
 import 'package:revxvendor/Utils/color.dart';
+import 'package:revxvendor/components/CustomSnackBar.dart';
+import 'package:revxvendor/logic/cubit/diognostic_get_tests/diognostic_getTests_cubit.dart';
+import 'package:revxvendor/logic/cubit/diognostic_get_tests/diognostic_getTests_state.dart';
 import 'package:revxvendor/logic/cubit/super_admin_tests/super_admin_test_cubit.dart';
 import 'package:revxvendor/logic/cubit/super_admin_tests/super_admin_test_state.dart';
 
@@ -21,9 +24,13 @@ class _AddtestsprovidedState extends State<Addtestsprovided> {
   }
 
   void _saveSelectedTests() {
-    // Handle saving selected test IDs
-    print("Selected Test IDs: $selectedTestIds");
+    if (selectedTestIds.isNotEmpty) {
+      context.read<DiagnosticTestsCubit>().addTests(selectedTestIds);
+    } else {
+      print("No test selected!");
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,12 +63,32 @@ class _AddtestsprovidedState extends State<Addtestsprovided> {
           return Center(child: Text("No tests available"));
         },
       ),
-      bottomNavigationBar: selectedTestIds.isNotEmpty
-          ? Padding(
-        padding: EdgeInsets.all(8.0),
-        child: CustomAppButton(text: "Save", onPlusTap: _saveSelectedTests),
-      )
-          : null,
+      bottomNavigationBar: BlocConsumer<DiagnosticTestsCubit, DiagnosticTestsState>(
+        listener: (context, state) {
+          if (state is DiagnosticTestsLoaded) {
+            CustomSnackBar.show(context, "Tests added successfully!");
+            Navigator.pop(context);
+          } else if (state is DiagnosticTestsError) {
+            CustomSnackBar.show(context,"Failed to add tests: ${state.message}");
+          }
+        },
+        builder: (context, state) {
+          if (selectedTestIds.isEmpty) {
+            return SizedBox.shrink(); // Return empty widget if no tests are selected
+          }
+          return Padding(
+            padding: EdgeInsets.all(8.0),
+            child: state is DiagnosticTestsLoading
+                ? Center(child: CircularProgressIndicator()) // Show loader while submitting
+                : CustomAppButton(
+              text: "Save",
+              onPlusTap: () {
+                context.read<DiagnosticTestsCubit>().addTests(selectedTestIds);
+              },
+            ),
+          );
+        },
+      ),
     );
   }
 

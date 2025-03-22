@@ -14,7 +14,7 @@ abstract class VendorRemoteDataSource {
   Future<SuccessModel?> postDiognosticRegister(FormData registerData);
   Future<VendorGetTestsModel?> DiagnosticgetTests();
   Future<SuccessModel?> DiagnosticDelateTest(String id);
-  Future<SuccessModel?> addTestApi();
+  Future<SuccessModel?> addTestApi(List<String> testIds);
   Future<DiognosticGetCategoriesModel?> DiognosticGetCategorys();
   Future<SuperAdminTestsModel?> getSuperAdminTestsApi();
 }
@@ -22,19 +22,25 @@ abstract class VendorRemoteDataSource {
 class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
 
   @override
-  Future<SuccessModel?> addTestApi() async {
+  Future<SuccessModel?> addTestApi(List<String> testIds) async {
     try {
-      Response response = await ApiClient.post("${RemoteUrls.addTests}");
+      FormData formData = FormData.fromMap({
+        "tests": testIds,  // Ensures the list is passed correctly
+      });
+
+      Response response = await ApiClient.post("${RemoteUrls.addTests}", data: formData);
+
       if (response.statusCode == 200) {
-        debugPrint('addTestApi:${response.data}',);
+        debugPrint('addTestApi Response: ${response.data}');
         return SuccessModel.fromJson(response.data);
       }
       return null;
     } catch (e) {
-      debugPrint(' Error addTestApi',);
+      debugPrint('Error in addTestApi: $e');
       return null;
     }
   }
+
 
   @override
   Future<SuperAdminTestsModel?> getSuperAdminTestsApi() async {

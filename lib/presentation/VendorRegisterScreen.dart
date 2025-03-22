@@ -4,6 +4,7 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:permission_handler/permission_handler.dart';
@@ -248,8 +249,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
           if (state is RegisterSuccessState) {
             if (state.successModel.settings?.success==1) {
               CustomSnackBar.show(context, state.message ?? '');
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => LogInWithEmail()));
+              context.pushReplacement('/login');
             } else {
               CustomSnackBar.show(context, state.message ?? '');
             }
@@ -619,7 +619,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                                         onTap: () {
                                           _pickImage(
                                               ImageSource.camera);
-                                          Navigator.pop(context);
+                                        context.pop();
                                         },
                                       ),
                                       ListTile(
@@ -630,7 +630,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                                         onTap: () {
                                           _pickImage(ImageSource
                                               .gallery);
-                                          Navigator.pop(context);
+                                         context.pop();
                                         },
                                       ),
                                     ],
@@ -751,10 +751,7 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                       ),
                       InkWell(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => LogInWithEmail()));
+                          context.pushReplacement('/login');
                         },
                         child: Text(
                           'Login',

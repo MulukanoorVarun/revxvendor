@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../Components/CustomAppButton.dart';
 import '../../../Components/CutomAppBar.dart';
@@ -42,10 +43,7 @@ class _VendorCatagoryState extends State<VendorCatagory> {
               child: IconButton.filledTonal(
                   visualDensity: VisualDensity.compact,
                   onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CreateNewCategory()));
+                    context.push('/create_new_category');
                   },
                   style: ButtonStyle(
                       padding: MaterialStateProperty.all(EdgeInsets.zero),

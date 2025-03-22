@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -26,7 +27,7 @@ class _VendorDashboardState extends State<VendorDashboard> {
     'Thu',
     'Fri',
     'Sat',
-    'Sun'
+    'Sun',
   ];
   List<DateTime> dates = [];
   DateTime selectedDate = DateTime.now();
@@ -44,10 +45,12 @@ class _VendorDashboardState extends State<VendorDashboard> {
   }
 
   void _scrollToSelectedDate() {
-    final index = dates.indexWhere((date) =>
-        date.day == selectedDate.day &&
-        date.month == selectedDate.month &&
-        date.year == selectedDate.year);
+    final index = dates.indexWhere(
+      (date) =>
+          date.day == selectedDate.day &&
+          date.month == selectedDate.month &&
+          date.year == selectedDate.year,
+    );
 
     if (index != -1) {
       final double offset = index * 55.0;
@@ -76,17 +79,18 @@ class _VendorDashboardState extends State<VendorDashboard> {
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: CustomAppBar(title: 'Dashboard', actions: [
-        IconButton(
+      appBar: CustomAppBar(
+        title: 'Dashboard',
+        actions: [
+          IconButton(
             padding: EdgeInsets.only(right: 10),
             onPressed: () {
               _showLogoutDialog(context);
             },
-            icon: Icon(
-              Icons.logout,
-              color: Colors.red,
-            ))
-      ]),
+            icon: Icon(Icons.logout, color: Colors.red),
+          ),
+        ],
+      ),
       body: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
         child: SingleChildScrollView(
@@ -99,31 +103,28 @@ class _VendorDashboardState extends State<VendorDashboard> {
                   Text(
                     'Today Appointments',
                     style: TextStyle(
-                        color: Color(0xff151515),
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15),
+                      color: Color(0xff151515),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
                   ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Appointments()));
-                      },
-                      icon: Icon(Icons.arrow_forward))
+                    onPressed: () {
+                      context.push('/appointments');
+                    },
+                    icon: Icon(Icons.arrow_forward),
+                  ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               _buildProjectStatusCard(context),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Card(
                 elevation: 4.0,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: Column(
@@ -134,106 +135,117 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           Container(
                             padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                                color: Color(0xffD2CBFF),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                    color: Color(0xffE2E2E2), width: 2)),
+                              color: Color(0xffD2CBFF),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: Color(0xffE2E2E2),
+                                width: 2,
+                              ),
+                            ),
                             child: Column(
                               children: [
                                 Text(
                                   textAlign: TextAlign.center,
                                   'Pending',
                                   style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontFamily: 'Poppins',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                                 Text(
                                   textAlign: TextAlign.center,
                                   '6',
                                   style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                )
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                                color: Color(0xffFFDDA9),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                    color: Color(0xffE2E2E2), width: 2)),
+                              color: Color(0xffFFDDA9),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: Color(0xffE2E2E2),
+                                width: 2,
+                              ),
+                            ),
                             child: Column(
                               children: [
                                 Text(
                                   textAlign: TextAlign.center,
                                   'Completed',
                                   style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontFamily: 'Poppins',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                                 Text(
                                   textAlign: TextAlign.center,
                                   '6',
                                   style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                )
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.all(12),
                             decoration: BoxDecoration(
-                                color: Color(0xffFFBBBB),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                    color: Color(0xffE2E2E2), width: 2)),
+                              color: Color(0xffFFBBBB),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                color: Color(0xffE2E2E2),
+                                width: 2,
+                              ),
+                            ),
                             child: Column(
                               children: [
                                 Text(
                                   textAlign: TextAlign.center,
                                   'Cancelled',
                                   style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontFamily: 'Poppins',
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w500),
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                                 Text(
                                   textAlign: TextAlign.center,
                                   '6',
                                   style: TextStyle(
-                                      color: Color(0xff000000),
-                                      fontFamily: 'Poppins',
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600),
-                                )
+                                    color: Color(0xff000000),
+                                    fontFamily: 'Poppins',
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       CustomAppButton(
-                          text: 'Create new appointment',
-                          onPlusTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Appointments()));
-                          })
+                        text: 'Create new appointment',
+                        onPlusTap: () {
+                          context.push('/appointments');
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -244,21 +256,23 @@ class _VendorDashboardState extends State<VendorDashboard> {
                   Text(
                     'Upcoming Appointments',
                     style: TextStyle(
-                        color: Color(0xff151515),
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15),
+                      color: Color(0xff151515),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
                   ),
-                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward))
+                  IconButton(onPressed: () {}, icon: Icon(Icons.arrow_forward)),
                 ],
               ),
               Text(
                 '02',
                 style: TextStyle(
-                    color: Color(0xff151515),
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w600,
-                    fontSize: 40),
+                  color: Color(0xff151515),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w600,
+                  fontSize: 40,
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -268,20 +282,17 @@ class _VendorDashboardState extends State<VendorDashboard> {
                     size: 24,
                     color: Color(0xff808080),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
+                  SizedBox(width: 40),
                   Text(
                     'Mar 01-07',
                     style: TextStyle(
-                        color: Color(0xff808080),
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 18),
+                      color: Color(0xff808080),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 18,
+                    ),
                   ),
-                  SizedBox(
-                    width: 40,
-                  ),
+                  SizedBox(width: 40),
                   Icon(
                     Icons.arrow_forward_ios_rounded,
                     size: 24,
@@ -289,16 +300,17 @@ class _VendorDashboardState extends State<VendorDashboard> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Card(
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Padding(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: 10,
+                    horizontal: 8,
+                  ),
                   child: Column(
                     children: [
                       SingleChildScrollView(
@@ -308,26 +320,29 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           children: List.generate(dates.length, (index) {
                             final isSelected =
                                 dates[index].day == selectedDate.day &&
-                                    dates[index].month == selectedDate.month &&
-                                    dates[index].year == selectedDate.year;
+                                dates[index].month == selectedDate.month &&
+                                dates[index].year == selectedDate.year;
                             return GestureDetector(
                               onTap: () {
                                 setState(() {
                                   selectedDate = dates[index];
-                                  formattedDate = DateFormat('yyyy-MM-dd')
-                                      .format(selectedDate);
+                                  formattedDate = DateFormat(
+                                    'yyyy-MM-dd',
+                                  ).format(selectedDate);
                                 });
                                 _scrollToSelectedDate();
                               },
                               child: ClipRect(
                                 child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 10,
+                                  ),
                                   width: 51.5,
                                   decoration: BoxDecoration(
-                                    color: isSelected
-                                        ? primaryColor
-                                        : Colors.transparent,
+                                    color:
+                                        isSelected
+                                            ? primaryColor
+                                            : Colors.transparent,
                                     borderRadius: BorderRadius.circular(8),
                                   ),
                                   child: Column(
@@ -339,9 +354,10 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                           fontWeight: FontWeight.w600,
                                           fontFamily: 'Poppins',
                                           fontSize: 20,
-                                          color: isSelected
-                                              ? Colors.white
-                                              : Colors.black,
+                                          color:
+                                              isSelected
+                                                  ? Colors.white
+                                                  : Colors.black,
                                         ),
                                       ),
                                       const SizedBox(height: 2),
@@ -361,81 +377,69 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           }),
                         ),
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Row(
                         children: [
-                          Icon(
-                            Icons.circle,
-                            color: primaryColor,
-                            size: 10,
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
+                          Icon(Icons.circle, color: primaryColor, size: 10),
+                          SizedBox(width: 10),
                           Text(
                             'It represents appointments on that day ',
                             style: TextStyle(
-                                color: Color(0xff808080),
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12),
+                              color: Color(0xff808080),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Row(
                         children: [
                           Text(
                             'H',
                             style: TextStyle(
-                                color: Color(0xffF26805),
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w500,
-                                fontSize: 18),
+                              color: Color(0xffF26805),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w500,
+                              fontSize: 18,
+                            ),
                           ),
-                          SizedBox(
-                            width: 10,
-                          ),
+                          SizedBox(width: 10),
                           Text(
                             'It represents Holiday',
                             style: TextStyle(
-                                color: Color(0xff808080),
-                                fontFamily: 'Poppins',
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12),
+                              color: Color(0xff808080),
+                              fontFamily: 'Poppins',
+                              fontWeight: FontWeight.w400,
+                              fontSize: 12,
+                            ),
                           ),
                         ],
-                      )
+                      ),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
                     'Today Tests',
                     style: TextStyle(
-                        color: Color(0xff151515),
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15),
+                      color: Color(0xff151515),
+                      fontFamily: 'Poppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                    ),
                   ),
                   IconButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => Appointments()));
-                      },
-                      icon: Icon(Icons.arrow_forward))
+                    onPressed: () {
+                      context.push('/appointments');
+                    },
+                    icon: Icon(Icons.arrow_forward),
+                  ),
                 ],
               ),
               Card(
@@ -453,14 +457,13 @@ class _VendorDashboardState extends State<VendorDashboard> {
                         children: [
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               gradient: RadialGradient(
-                                colors: [
-                                  Color(0xFF88E7FD),
-                                  Color(0xFF086478),
-                                ],
+                                colors: [Color(0xFF88E7FD), Color(0xFF086478)],
                                 focal: Alignment.topRight,
                                 radius: 1.0,
                               ),
@@ -474,41 +477,38 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                   width: 50,
                                   height: 50,
                                 ),
-                                SizedBox(
-                                  height: 2,
-                                ),
+                                SizedBox(height: 2),
                                 Text(
                                   'MRI Scan',
                                   style: TextStyle(
-                                      color: Color(0xff151515),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15),
+                                    color: Color(0xff151515),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
+                                SizedBox(height: 10),
                                 Text(
                                   '10:30 AM',
                                   style: TextStyle(
-                                      color: Color(0xffFFFFFF),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15),
+                                    color: Color(0xffFFFFFF),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               gradient: RadialGradient(
-                                colors: [
-                                  Color(0xFF88E7FD),
-                                  Color(0xFF086478),
-                                ],
+                                colors: [Color(0xFF88E7FD), Color(0xFF086478)],
                                 focal: Alignment.topRight,
                                 radius: 1.0,
                               ),
@@ -522,41 +522,38 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                   width: 50,
                                   height: 50,
                                 ),
-                                SizedBox(
-                                  height: 2,
-                                ),
+                                SizedBox(height: 2),
                                 Text(
                                   'CBC',
                                   style: TextStyle(
-                                      color: Color(0xff151515),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15),
+                                    color: Color(0xff151515),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
+                                SizedBox(height: 10),
                                 Text(
                                   '10:30 AM',
                                   style: TextStyle(
-                                      color: Color(0xffFFFFFF),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15),
+                                    color: Color(0xffFFFFFF),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                           Container(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 10, vertical: 10),
+                              horizontal: 10,
+                              vertical: 10,
+                            ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(16),
                               gradient: RadialGradient(
-                                colors: [
-                                  Color(0xFF88E7FD),
-                                  Color(0xFF086478),
-                                ],
+                                colors: [Color(0xFF88E7FD), Color(0xFF086478)],
                                 focal: Alignment.topRight,
                                 radius: 1.0,
                               ),
@@ -570,43 +567,42 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                   width: 50,
                                   height: 50,
                                 ),
-                                SizedBox(
-                                  height: 2,
-                                ),
+                                SizedBox(height: 2),
                                 Text(
                                   'X-Ray',
                                   style: TextStyle(
-                                      color: Color(0xff151515),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15),
+                                    color: Color(0xff151515),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
                                 ),
-                                SizedBox(
-                                  height: 10,
-                                ),
+                                SizedBox(height: 10),
                                 Text(
                                   '10:30 AM',
                                   style: TextStyle(
-                                      color: Color(0xffFFFFFF),
-                                      fontFamily: 'Poppins',
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 15),
+                                    color: Color(0xffFFFFFF),
+                                    fontFamily: 'Poppins',
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 15,
+                                  ),
                                 ),
                               ],
                             ),
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 10,
-                      ),
+                      SizedBox(height: 10),
                       Container(
                         width: w,
                         padding: EdgeInsets.all(14),
                         decoration: BoxDecoration(
                           color: Colors.white,
                           borderRadius: BorderRadius.circular(12),
-                          border: Border.all(color: Color(0xffE2E2E2), width: 2),
+                          border: Border.all(
+                            color: Color(0xffE2E2E2),
+                            width: 2,
+                          ),
                           boxShadow: [
                             BoxShadow(
                               color: Colors.black.withOpacity(0.1),
@@ -620,10 +616,16 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           children: [
                             // Gradient Banner
                             Container(
-                              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                              padding: EdgeInsets.symmetric(
+                                horizontal: 12,
+                                vertical: 8,
+                              ),
                               decoration: BoxDecoration(
                                 gradient: LinearGradient(
-                                  colors: [Color(0xffA788FD), Color(0xff250878)],
+                                  colors: [
+                                    Color(0xffA788FD),
+                                    Color(0xff250878),
+                                  ],
                                   begin: Alignment.topLeft,
                                   end: Alignment.bottomRight,
                                 ),
@@ -647,7 +649,10 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                 Container(
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    border: Border.all(color: Color(0xffA788FD), width: 2),
+                                    border: Border.all(
+                                      color: Color(0xffA788FD),
+                                      width: 2,
+                                    ),
                                   ),
                                   child: CircleAvatar(
                                     radius: 26,
@@ -666,7 +671,8 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                 // Patient Info
                                 Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Charan Konidela',
@@ -713,21 +719,21 @@ class _VendorDashboardState extends State<VendorDashboard> {
                   ),
                 ),
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10),
               Text(
                 'Quick Action',
                 style: TextStyle(
-                    color: Color(0xff151515),
-                    fontFamily: 'Poppins',
-                    fontWeight: FontWeight.w500,
-                    fontSize: 15),
+                  color: Color(0xff151515),
+                  fontFamily: 'Poppins',
+                  fontWeight: FontWeight.w500,
+                  fontSize: 15,
+                ),
               ),
               Card(
                 elevation: 4.0,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8)),
+                  borderRadius: BorderRadius.circular(8),
+                ),
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   child: Column(
@@ -738,14 +744,13 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           Expanded(
                             child: InkResponse(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => CatagoryList()));
+                                context.push('/category_list');
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
+                                  horizontal: 10,
+                                  vertical: 10,
+                                ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   gradient: RadialGradient(
@@ -781,7 +786,9 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                     SizedBox(height: 2),
                                     Padding(
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 10),
+                                        horizontal: 10,
+                                        vertical: 10,
+                                      ),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -803,20 +810,17 @@ class _VendorDashboardState extends State<VendorDashboard> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 16,
-                          ),
+                          SizedBox(width: 16),
                           Expanded(
                             child: InkResponse(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => VendorTest()));
+                    context.push('/vendor_test');
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
+                                  horizontal: 10,
+                                  vertical: 10,
+                                ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   gradient: RadialGradient(
@@ -852,7 +856,9 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                     SizedBox(height: 2),
                                     Padding(
                                       padding: EdgeInsets.symmetric(
-                                          horizontal: 10, vertical: 10),
+                                        horizontal: 10,
+                                        vertical: 10,
+                                      ),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -876,16 +882,16 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
                                 gradient: RadialGradient(
@@ -921,7 +927,9 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                   SizedBox(height: 2),
                                   Padding(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 10),
+                                      horizontal: 10,
+                                      vertical: 10,
+                                    ),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -942,13 +950,13 @@ class _VendorDashboardState extends State<VendorDashboard> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 16,
-                          ),
+                          SizedBox(width: 16),
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
                                 gradient: RadialGradient(
@@ -1006,16 +1014,16 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20,
-                      ),
+                      SizedBox(height: 20),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
                             child: Container(
                               padding: EdgeInsets.symmetric(
-                                  horizontal: 10, vertical: 10),
+                                horizontal: 10,
+                                vertical: 10,
+                              ),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
                                 gradient: RadialGradient(
@@ -1051,7 +1059,9 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                   SizedBox(height: 2),
                                   Padding(
                                     padding: EdgeInsets.symmetric(
-                                        horizontal: 10, vertical: 10),
+                                      horizontal: 10,
+                                      vertical: 10,
+                                    ),
                                     child: Row(
                                       mainAxisAlignment:
                                           MainAxisAlignment.center,
@@ -1072,20 +1082,17 @@ class _VendorDashboardState extends State<VendorDashboard> {
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 16,
-                          ),
+                          SizedBox(width: 16),
                           Expanded(
                             child: InkResponse(
                               onTap: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => Patients()));
+                            context.push('/patients');
                               },
                               child: Container(
                                 padding: EdgeInsets.symmetric(
-                                    horizontal: 10, vertical: 10),
+                                  horizontal: 10,
+                                  vertical: 10,
+                                ),
                                 decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(16),
                                   gradient: RadialGradient(
@@ -1120,8 +1127,9 @@ class _VendorDashboardState extends State<VendorDashboard> {
                                     ),
                                     SizedBox(height: 2),
                                     Padding(
-                                      padding:
-                                          EdgeInsets.symmetric(vertical: 10),
+                                      padding: EdgeInsets.symmetric(
+                                        vertical: 10,
+                                      ),
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
@@ -1145,16 +1153,12 @@ class _VendorDashboardState extends State<VendorDashboard> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 16,
-                      ),
+                      SizedBox(height: 16),
                     ],
                   ),
                 ),
               ),
-              SizedBox(
-                height: 30,
-              ),
+              SizedBox(height: 30),
             ],
           ),
         ),
@@ -1201,7 +1205,10 @@ class _VendorDashboardState extends State<VendorDashboard> {
           CustomPaint(
             size: Size(136, 136),
             painter: RoundedProgressPainter(
-                pendingProgress, completedProgress, cancelledProgress),
+              pendingProgress,
+              completedProgress,
+              cancelledProgress,
+            ),
           ),
           RichText(
             textAlign: TextAlign.center,
@@ -1239,37 +1246,26 @@ class _VendorDashboardState extends State<VendorDashboard> {
   Widget _buildProjectDetails() {
     return Column(
       children: [
-        Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              Row(
-                children: [
-                  _buildLegendItem(Color(0xffD2CBFF), "Pending"),
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              Row(
-                children: [
-                  _buildLegendItem(Color(0xffFFDDA9), "Completed"),
-                ],
-              ),
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.01,
-              ),
-              Row(
-                children: [
-                  _buildLegendItem(Color(0xffFFBBBB), "Cancelled"),
-                ],
-              ),
-            ],
-          )
-        ]),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                Row(children: [_buildLegendItem(Color(0xffD2CBFF), "Pending")]),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                Row(
+                  children: [_buildLegendItem(Color(0xffFFDDA9), "Completed")],
+                ),
+                SizedBox(height: MediaQuery.of(context).size.height * 0.01),
+                Row(
+                  children: [_buildLegendItem(Color(0xffFFBBBB), "Cancelled")],
+                ),
+              ],
+            ),
+          ],
+        ),
       ],
     );
   }
@@ -1286,12 +1282,15 @@ class _VendorDashboardState extends State<VendorDashboard> {
           ),
         ),
         SizedBox(width: 10),
-        Text(label,
-            style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontFamily: "Poppins",
-                fontSize: 12,
-                color: Color(0xff000000))),
+        Text(
+          label,
+          style: TextStyle(
+            fontWeight: FontWeight.w500,
+            fontFamily: "Poppins",
+            fontSize: 12,
+            color: Color(0xff000000),
+          ),
+        ),
       ],
     );
   }
@@ -1303,7 +1302,10 @@ class RoundedProgressPainter extends CustomPainter {
   final double cancelledProgress;
 
   RoundedProgressPainter(
-      this.pendingProgress, this.completedProgress, this.cancelledProgress);
+    this.pendingProgress,
+    this.completedProgress,
+    this.cancelledProgress,
+  );
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -1311,30 +1313,34 @@ class RoundedProgressPainter extends CustomPainter {
     print("Completed Progress: $completedProgress");
     print("Cancelled Progress: $cancelledProgress");
 
-    final Paint paintBackground = Paint()
-      ..color = Colors.white10
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 10
-      ..strokeCap = StrokeCap.round;
+    final Paint paintBackground =
+        Paint()
+          ..color = Colors.white10
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 10
+          ..strokeCap = StrokeCap.round;
 
     // Colors for each section
-    final Paint paintPending = Paint()
-      ..color = Color(0xffD2CBFF)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 10
-      ..strokeCap = StrokeCap.round;
+    final Paint paintPending =
+        Paint()
+          ..color = Color(0xffD2CBFF)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 10
+          ..strokeCap = StrokeCap.round;
 
-    final Paint paintCompleted = Paint()
-      ..color = Color(0xffFFDDA9)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 10
-      ..strokeCap = StrokeCap.round;
+    final Paint paintCompleted =
+        Paint()
+          ..color = Color(0xffFFDDA9)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 10
+          ..strokeCap = StrokeCap.round;
 
-    final Paint paintCancelled = Paint()
-      ..color = Color(0xffFFBBBB)
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 10
-      ..strokeCap = StrokeCap.round;
+    final Paint paintCancelled =
+        Paint()
+          ..color = Color(0xffFFBBBB)
+          ..style = PaintingStyle.stroke
+          ..strokeWidth = 10
+          ..strokeCap = StrokeCap.round;
 
     final double radius = size.width / 2;
 
@@ -1355,8 +1361,9 @@ class RoundedProgressPainter extends CustomPainter {
     // Draw each progress arc (pending, completed, cancelled)
     canvas.drawArc(
       Rect.fromCircle(
-          center: Offset(radius, radius),
-          radius: radius - paintPending.strokeWidth / 2),
+        center: Offset(radius, radius),
+        radius: radius - paintPending.strokeWidth / 2,
+      ),
       -3.141592653589793 / 2,
       pendingAngle,
       false,
@@ -1365,8 +1372,9 @@ class RoundedProgressPainter extends CustomPainter {
 
     canvas.drawArc(
       Rect.fromCircle(
-          center: Offset(radius, radius),
-          radius: radius - paintCompleted.strokeWidth / 2),
+        center: Offset(radius, radius),
+        radius: radius - paintCompleted.strokeWidth / 2,
+      ),
       -3.141592653589793 / 2 + pendingAngle,
       completedAngle,
       false,
@@ -1375,8 +1383,9 @@ class RoundedProgressPainter extends CustomPainter {
 
     canvas.drawArc(
       Rect.fromCircle(
-          center: Offset(radius, radius),
-          radius: radius - paintCancelled.strokeWidth / 2),
+        center: Offset(radius, radius),
+        radius: radius - paintCancelled.strokeWidth / 2,
+      ),
       -3.141592653589793 / 2 + pendingAngle + completedAngle,
       cancelledAngle,
       false,
@@ -1397,8 +1406,9 @@ void _showLogoutDialog(BuildContext context) {
       return Dialog(
         elevation: 4.0,
         insetPadding: const EdgeInsets.symmetric(horizontal: 14.0),
-        shape:
-            RoundedRectangleBorder(borderRadius: BorderRadius.circular(16.0)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(16.0),
+        ),
         child: SizedBox(
           width: 300.0,
           height: 200.0,
@@ -1439,19 +1449,21 @@ void _showLogoutDialog(BuildContext context) {
                       Text(
                         "Logout",
                         style: TextStyle(
-                            fontSize: 24.0,
-                            fontWeight: FontWeight.w600,
-                            color: primaryColor,
-                            fontFamily: "Poppins"),
+                          fontSize: 24.0,
+                          fontWeight: FontWeight.w600,
+                          color: primaryColor,
+                          fontFamily: "Poppins",
+                        ),
                       ),
                       const SizedBox(height: 10.0),
                       const Text(
                         "Are you sure you want to logout?",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                            fontSize: 16.0,
-                            color: Colors.black54,
-                            fontFamily: "Poppins"),
+                          fontSize: 16.0,
+                          color: Colors.black54,
+                          fontFamily: "Poppins",
+                        ),
                       ),
                       const SizedBox(height: 20.0),
 
@@ -1463,21 +1475,24 @@ void _showLogoutDialog(BuildContext context) {
                           SizedBox(
                             width: 100,
                             child: ElevatedButton(
-                              onPressed: () => Navigator.pop(context),
+                              onPressed: () => context.pop(),
                               style: ElevatedButton.styleFrom(
                                 elevation: 0,
                                 backgroundColor:
                                     primaryColor, // Filled button color
                                 foregroundColor: Colors.white, // Text color
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
+                                  horizontal: 20,
+                                  vertical: 10,
+                                ),
                               ),
                               child: const Text(
                                 "No",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    fontFamily: "Poppins"),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  fontFamily: "Poppins",
+                                ),
                               ),
                             ),
                           ),
@@ -1490,26 +1505,25 @@ void _showLogoutDialog(BuildContext context) {
                                 SharedPreferences sharedPreferences =
                                     await SharedPreferences.getInstance();
                                 sharedPreferences.remove('access_token');
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            LogInWithEmail()));
+                                context.pushReplacement('/login');
                               },
                               style: OutlinedButton.styleFrom(
-                                foregroundColor:
-                                    primaryColor, // Text color
+                                foregroundColor: primaryColor, // Text color
                                 side: BorderSide(
-                                    color: primaryColor), // Border color
+                                  color: primaryColor,
+                                ), // Border color
                                 padding: const EdgeInsets.symmetric(
-                                    horizontal: 20, vertical: 10),
+                                  horizontal: 20,
+                                  vertical: 10,
+                                ),
                               ),
                               child: const Text(
                                 "Yes",
                                 style: TextStyle(
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 16,
-                                    fontFamily: "Poppins"),
+                                  fontWeight: FontWeight.w600,
+                                  fontSize: 16,
+                                  fontFamily: "Poppins",
+                                ),
                               ),
                             ),
                           ),

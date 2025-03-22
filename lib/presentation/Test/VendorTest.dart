@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:revxvendor/Components/CutomAppBar.dart';
 import 'package:revxvendor/presentation/Test/AddTestsProvided.dart';
 import '../../Components/CustomAppButton.dart';
@@ -40,10 +41,7 @@ class _VendorTestState extends State<VendorTest> {
             child: IconButton.filledTonal(
               visualDensity: VisualDensity.compact,
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Addtestsprovided()),
-                );
+               context.push('/add_tests_provided');
               },
               style: ButtonStyle(
                 padding: MaterialStateProperty.all(EdgeInsets.zero),

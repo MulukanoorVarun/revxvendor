@@ -2,6 +2,7 @@ import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../../Components/ShakeWidget.dart';
 import '../../Components/CustomAppButton.dart';
@@ -546,8 +547,7 @@ class _CreateNewTestState extends State<CreateNewTest> {
             color: primaryColor,
             text: 'Submit for approval',
             onPlusTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ApprovalPending()));
+              context.push('/approval_pending');
             }),
       ),
     );

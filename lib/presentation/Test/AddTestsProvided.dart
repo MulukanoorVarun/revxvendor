@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:revxvendor/Components/CustomAppButton.dart';
 import 'package:revxvendor/Models/SuperAdminTestsModel.dart';
 import 'package:revxvendor/Utils/color.dart';
@@ -67,7 +68,7 @@ class _AddtestsprovidedState extends State<Addtestsprovided> {
         listener: (context, state) {
           if (state is DiagnosticTestsLoaded) {
             CustomSnackBar.show(context, "Tests added successfully!");
-            Navigator.pop(context);
+            context.pop();
           } else if (state is DiagnosticTestsError) {
             CustomSnackBar.show(context,"Failed to add tests: ${state.message}");
           }

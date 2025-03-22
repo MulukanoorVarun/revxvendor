@@ -2,6 +2,7 @@ import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 import '../../Utils/NoInternet.dart';
 import '../Utils/Preferances.dart';
@@ -83,14 +84,11 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
 
   void _navigateToNextScreen() {
     Future.microtask(() {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => Token == ''
-              ? LogInWithEmail()
-              : VendorDashboard(),
-        ),
-      );
+      if(Token==''){
+        context.pushReplacement('/login');
+      }else{
+        context.pushReplacement('/vendor_dashboard');
+      }
     });
   }
 
@@ -105,10 +103,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
         listener: (context, state) {
             if (state is InternetStatusLostState) {
             Future.microtask(() {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => NoInternetWidget()),
-              );
+           context.push(('/no_internet'));
             });
           }
         },

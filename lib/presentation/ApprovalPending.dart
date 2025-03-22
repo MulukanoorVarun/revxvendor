@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../Components/CustomAppButton.dart';
 
@@ -17,7 +18,7 @@ class _ApprovalPendingState extends State<ApprovalPending> {
       appBar: AppBar(
         leading: IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              context.pop(true);
             },
             icon: Icon(
               Icons.arrow_back_ios_new,

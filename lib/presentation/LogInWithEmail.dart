@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 import 'package:revxvendor/Components/ShakeWidget.dart';
 import 'package:revxvendor/Services/AuthService.dart';
 import 'package:revxvendor/Utils/Preferances.dart';
@@ -68,8 +69,7 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
             AuthService.saveTokens( state.loginModel.data?.access ?? "",
                 state.loginModel.data?.refresh ?? "", state.loginModel.data?.expiryTime ?? 0);
             CustomSnackBar.show(context, state.message ?? '');
-              Navigator.pushReplacement(context,
-                  MaterialPageRoute(builder: (context) => VendorDashboard()));
+            context.pushReplacement('/vendor_dashboard');
 
           } else {
             CustomSnackBar.show(context, state.message ?? '');
@@ -350,10 +350,7 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
                   // Registration Link
                   InkWell(
                     onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => VendorRegisterScreen()));
+                     context.push('/vendor_register_screen');
                     },
                     child: RichText(
                       text: TextSpan(

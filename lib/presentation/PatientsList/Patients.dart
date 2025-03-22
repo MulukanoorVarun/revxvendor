@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 import '../../Components/CutomAppBar.dart';
@@ -129,7 +130,7 @@ class _PatientsState extends State<Patients> {
                 itemCount: 3,
                 itemBuilder: (context, index) {
                   return InkResponse(onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>PateintDetails()));
+                  context.push('/patient_details');
                   },
                     child: Container(
                       padding: EdgeInsets.symmetric(vertical: 10),

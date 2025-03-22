@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:go_router/go_router.dart';
 
 import '../logic/bloc/internet_status/internet_status_bloc.dart';
 import 'color.dart';
@@ -12,7 +13,7 @@ class NoInternetWidget extends StatelessWidget {
         listener: (context, state) {
           if (state is InternetStatusBackState) {
             // If internet is back, automatically go back to the previous screen
-            Navigator.pop(context);
+            context.pop();
           }
         },
         child: Center(

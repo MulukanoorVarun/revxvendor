@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../Utils/color.dart';
 
@@ -215,7 +216,7 @@ class _PatientVisitState extends State<PatientVisit> {
                                       overlayColor: MaterialStateProperty.all(
                                           Colors.cyan.shade50)),
                                   onPressed: () {
-                                  Navigator.pop(context);
+                                  context.pop();
                                   },
                                   child: Text(
                                     'View User Data',

@@ -1,5 +1,6 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../Utils/color.dart';
 
@@ -48,7 +49,7 @@ class _AppointmentsState extends State<Appointments>
                 children: [
                   IconButton(
                     onPressed: () {
-                      Navigator.pop(context, true);
+                      context.pop(true);
                     },
                     icon: Icon(
                       Icons.arrow_back_ios_new,

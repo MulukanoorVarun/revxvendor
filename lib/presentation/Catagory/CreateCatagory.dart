@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import '../../../Components/CustomAppButton.dart';
 import '../../../Components/CutomAppBar.dart';
 import '../../../Components/ShakeWidget.dart';
@@ -392,8 +393,7 @@ class _CreateNewCategoryState extends State<CreateNewCategory>  {
             color: primaryColor,
             text: 'Submit for approval',
             onPlusTap: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => ApprovalPending()));
+            context.push('/approval_pending');
             }),
       ),
     );

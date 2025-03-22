@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:permission_handler/permission_handler.dart';
-import '../../../Components/CutomAppBar.dart';
+import 'package:revxvendor/Components/CutomAppBar.dart';
+import 'package:revxvendor/presentation/Test/AddTestsProvided.dart';
 import '../../Components/CustomAppButton.dart';
 import '../../Utils/color.dart';
 import '../../components/Shimmers.dart';
@@ -42,7 +42,7 @@ class _VendorTestState extends State<VendorTest> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => CreateNewTest()),
+                  MaterialPageRoute(builder: (context) => Addtestsprovided()),
                 );
               },
               style: ButtonStyle(
@@ -59,77 +59,77 @@ class _VendorTestState extends State<VendorTest> {
         margin: EdgeInsets.symmetric(horizontal: 16),
         padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(color: Colors.white),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 6),
-                height: 38,
-                decoration: BoxDecoration(
-                  border: Border.all(color: primaryColor),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: TextField(
-                        controller: _searchController,
-                        onChanged: (c) {
-                          setState(() {
-                            if (c.length > 2) {
-                              searchQuery = c.toLowerCase();
-                            } else {
-                              searchQuery = "";
-                            }
-                          });
-                        },
-                        decoration: InputDecoration(
-                          isCollapsed: true,
-                          border: InputBorder.none,
-                          hintText: 'Search Tests',
-                          icon: Icon(Icons.search, color: Color(0xff808080)),
-                          hintStyle: TextStyle(
-                            overflow: TextOverflow.ellipsis,
-                            color: Color(0xff808080),
-                            fontWeight: FontWeight.w500,
-                            fontSize: 14,
-                            fontFamily: "Inter",
-                          ),
-                        ),
-                        style: TextStyle(
-                          color: primaryColor,
-                          fontWeight: FontWeight.w400,
-                          fontSize: 16,
-                          fontFamily: "Poppins",
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        textAlignVertical: TextAlignVertical.center,
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        _isListening ? Icons.stop : Icons.mic,
-                        color: primaryColor,
-                        size: 18,
-                      ),
-                      onPressed: () {},
-                    ),
-                  ],
-                ),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 6),
+              height: 38,
+              decoration: BoxDecoration(
+                border: Border.all(color: primaryColor),
+                borderRadius: BorderRadius.circular(8),
               ),
-              SizedBox(height: 20),
-              BlocBuilder<DiagnosticTestsCubit, DiagnosticTestsState>(
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _searchController,
+                      onChanged: (c) {
+                        setState(() {
+                          if (c.length > 2) {
+                            searchQuery = c.toLowerCase();
+                          } else {
+                            searchQuery = "";
+                          }
+                        });
+                      },
+                      decoration: InputDecoration(
+                        isCollapsed: true,
+                        border: InputBorder.none,
+                        hintText: 'Search Tests',
+                        icon: Icon(Icons.search, color: Color(0xff808080)),
+                        hintStyle: TextStyle(
+                          overflow: TextOverflow.ellipsis,
+                          color: Color(0xff808080),
+                          fontWeight: FontWeight.w500,
+                          fontSize: 14,
+                          fontFamily: "Inter",
+                        ),
+                      ),
+                      style: TextStyle(
+                        color: primaryColor,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16,
+                        fontFamily: "Poppins",
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      textAlignVertical: TextAlignVertical.center,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      _isListening ? Icons.stop : Icons.mic,
+                      color: primaryColor,
+                      size: 18,
+                    ),
+                    onPressed: () {},
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: BlocBuilder<DiagnosticTestsCubit, DiagnosticTestsState>(
                 builder: (context, state) {
                   if (state is DiagnosticTestsLoading) {
                     Center(child: _shimmerList());
                   } else if (state is DiagnosticTestListLoaded) {
                     return ListView.builder(
                       shrinkWrap: true,
+              
                       itemCount: state.data.data?.length,
                       itemBuilder: (context, index) {
                         final item = state.data.data?[index];
                         print('item:${item}');
-
                         return Container(
                           margin: EdgeInsets.only(bottom: 10),
                           padding: EdgeInsets.symmetric(
@@ -155,7 +155,7 @@ class _VendorTestState extends State<VendorTest> {
                                     child: Text(
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
-                                      item?.testName ?? '',
+                                      item?.testDetails?.testName ?? '',
                                       style: TextStyle(
                                         fontFamily: 'Poppins',
                                         fontWeight: FontWeight.w600,
@@ -187,7 +187,11 @@ class _VendorTestState extends State<VendorTest> {
                                   ),
                                   IconButton.filledTonal(
                                     visualDensity: VisualDensity.compact,
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      context
+                                          .read<DiagnosticTestsCubit>()
+                                          .delateTests(item?.id ?? '');
+                                    },
                                     style: ButtonStyle(
                                       padding: MaterialStateProperty.all(
                                         EdgeInsets.zero,
@@ -213,7 +217,7 @@ class _VendorTestState extends State<VendorTest> {
                                 width: w * 0.8,
                                 child: Text(
                                   overflow: TextOverflow.ellipsis,
-                                  'Category : ${item?.category ?? ''}',
+                                  'Category : ${item?.testDetails?.category ?? ''}',
                                   style: TextStyle(
                                     fontFamily: 'Poppins',
                                     fontWeight: FontWeight.w400,
@@ -226,7 +230,8 @@ class _VendorTestState extends State<VendorTest> {
                               CustomAppButton(
                                 width: w * 0.65,
                                 height: h * 0.045,
-                                text: 'Price : ₹ ${item?.price ?? ''}0/- ',
+                                text:
+                                    'Price : ₹ ${item?.testDetails?.price ?? ''}0/- ',
                                 onPlusTap: () {},
                               ),
                             ],
@@ -240,8 +245,8 @@ class _VendorTestState extends State<VendorTest> {
                   return Center(child: Text("No Data"));
                 },
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

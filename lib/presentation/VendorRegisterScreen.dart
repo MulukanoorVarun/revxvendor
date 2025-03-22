@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:dio/dio.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
@@ -8,12 +7,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:permission_handler/permission_handler.dart';
-import '../../Components/ShakeWidget.dart';
+import 'package:revxvendor/Components/ShakeWidget.dart';
 import 'package:path/path.dart' as p;
-
+import 'package:revxvendor/logic/cubit/diognostic_register/register_cubit.dart';
 import '../Utils/color.dart';
 import '../components/CustomSnackBar.dart';
-import '../logic/cubit/diognostic_register/register_cubit.dart';
 import '../logic/cubit/diognostic_register/register_state.dart';
 import 'LogInWithEmail.dart';
 

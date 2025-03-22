@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
-import '../Services/AuthService.dart';
-import '../Utils/Preferances.dart';
-import '../Utils/color.dart';
-import '../components/CustomSnackBar.dart';
-import '../components/ShakeWidget.dart';
-import '../logic/cubit/login/login_cubit.dart';
-import '../logic/cubit/login/login_state.dart';
+import 'package:revxvendor/Components/ShakeWidget.dart';
+import 'package:revxvendor/Services/AuthService.dart';
+import 'package:revxvendor/Utils/Preferances.dart';
+import 'package:revxvendor/Utils/color.dart';
+import 'package:revxvendor/components/CustomSnackBar.dart';
+import 'package:revxvendor/logic/cubit/login/login_cubit.dart';
+import 'package:revxvendor/logic/cubit/login/login_state.dart';
+import 'package:revxvendor/presentation/VendorDashBoard.dart';
+import 'package:revxvendor/presentation/VendorRegisterScreen.dart';
 
 
 class LogInWithEmail extends StatefulWidget {
@@ -67,6 +68,9 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
             AuthService.saveTokens( state.loginModel.data?.access ?? "",
                 state.loginModel.data?.refresh ?? "", state.loginModel.data?.expiryTime ?? 0);
             CustomSnackBar.show(context, state.message ?? '');
+              Navigator.pushReplacement(context,
+                  MaterialPageRoute(builder: (context) => VendorDashboard()));
+
           } else {
             CustomSnackBar.show(context, state.message ?? '');
           }
@@ -96,10 +100,11 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
                   Center(
                     child: Image.asset(
                       "assets/login.png",
-                      width: 200,
-                      height: 200,
+                      width: 250,
+                      height: 250,
                     ),
                   ),
+                  SizedBox(height: 20),
                   // Phone Number Input Field
                   Container(
                     decoration: BoxDecoration(
@@ -255,96 +260,100 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
                       ),
                     ),
                   ),
-
-                  SizedBox(height: 20),
-                  // OR Text
-                  Text(
-                    'Or',
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-
-                  // Sign in with Google Button
-                  Container(
-                    width: double.infinity, // Full width
-                    height: 50.0, // Set height for the button
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 10.0), // Margin for spacing
-                    child: Material(
-                      color: Colors.white, // Button background color
-                      borderRadius: BorderRadius.circular(30.0),
-                      elevation: 2, // Shadow effect
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(30.0),
-                        onTap: () {
-                          // Implement Sign in with Google functionality
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/google.png', // Google icon asset
-                              height: 24.0,
-                            ),
-                            SizedBox(
-                                width: 12.0), // Spacing between icon and text
-                            Text(
-                              'Sign in with Google',
-                              style: TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.black,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 15),
-                  Container(
-                    width: double.infinity, // Full width
-                    height: 50.0, // Set height for the button
-                    margin: EdgeInsets.symmetric(
-                        horizontal: 10.0), // Margin for spacing
-                    child: Material(
-                      color: Colors.white, // Button background color
-                      borderRadius: BorderRadius.circular(30.0),
-                      elevation: 2, // Shadow effect
-                      child: InkWell(
-                        borderRadius: BorderRadius.circular(30.0),
-                        onTap: () {
-                          // Implement Sign in with Apple functionality
-                        },
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Image.asset(
-                              'assets/apple.png', // Apple icon asset
-                              height: 24.0,
-                            ),
-                            SizedBox(
-                                width: 12.0), // Spacing between icon and text
-                            Text(
-                              'Sign in with Apple',
-                              style: TextStyle(
-                                  fontSize: 18,
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 40),
+                  //
+                  // SizedBox(height: 20),
+                  // // OR Text
+                  // Text(
+                  //   'Or',
+                  //   style: TextStyle(
+                  //     fontSize: 16,
+                  //     color: Colors.grey,
+                  //   ),
+                  // ),
+                  // SizedBox(height: 20),
+                  //
+                  // // Sign in with Google Button
+                  // Container(
+                  //   width: double.infinity, // Full width
+                  //   height: 50.0, // Set height for the button
+                  //   margin: EdgeInsets.symmetric(
+                  //       horizontal: 10.0), // Margin for spacing
+                  //   child: Material(
+                  //     color: Colors.white, // Button background color
+                  //     borderRadius: BorderRadius.circular(30.0),
+                  //     elevation: 2, // Shadow effect
+                  //     child: InkWell(
+                  //       borderRadius: BorderRadius.circular(30.0),
+                  //       onTap: () {
+                  //         // Implement Sign in with Google functionality
+                  //       },
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Image.asset(
+                  //             'assets/google.png', // Google icon asset
+                  //             height: 24.0,
+                  //           ),
+                  //           SizedBox(
+                  //               width: 12.0), // Spacing between icon and text
+                  //           Text(
+                  //             'Sign in with Google',
+                  //             style: TextStyle(
+                  //               fontSize: 18,
+                  //               fontWeight: FontWeight.w400,
+                  //               color: Colors.black,
+                  //             ),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(height: 15),
+                  // Container(
+                  //   width: double.infinity, // Full width
+                  //   height: 50.0, // Set height for the button
+                  //   margin: EdgeInsets.symmetric(
+                  //       horizontal: 10.0), // Margin for spacing
+                  //   child: Material(
+                  //     color: Colors.white, // Button background color
+                  //     borderRadius: BorderRadius.circular(30.0),
+                  //     elevation: 2, // Shadow effect
+                  //     child: InkWell(
+                  //       borderRadius: BorderRadius.circular(30.0),
+                  //       onTap: () {
+                  //         // Implement Sign in with Apple functionality
+                  //       },
+                  //       child: Row(
+                  //         mainAxisAlignment: MainAxisAlignment.center,
+                  //         children: [
+                  //           Image.asset(
+                  //             'assets/apple.png', // Apple icon asset
+                  //             height: 24.0,
+                  //           ),
+                  //           SizedBox(
+                  //               width: 12.0), // Spacing between icon and text
+                  //           Text(
+                  //             'Sign in with Apple',
+                  //             style: TextStyle(
+                  //                 fontSize: 18,
+                  //                 color: Colors.black,
+                  //                 fontWeight: FontWeight.w400),
+                  //           ),
+                  //         ],
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  SizedBox(height: 10),
 
                   // Registration Link
                   InkWell(
                     onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VendorRegisterScreen()));
                     },
                     child: RichText(
                       text: TextSpan(
@@ -371,4 +380,3 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
     );
   }
 }
-

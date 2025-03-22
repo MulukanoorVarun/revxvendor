@@ -21,12 +21,12 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
   late Animation<double> _animation;
 
   String token = "";
-  String status = "";
+  // String status = "";
 
   @override
   void initState() {
     super.initState();
-    _checkPermissions();
+
     fetchDetails();
     _controller = AnimationController(
       duration: Duration(seconds: 2),
@@ -42,52 +42,45 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     super.dispose();
   }
 
-  String Status = '';
-  String Status1 = '';
   String Token = '';
-  bool permissions_granted = false;
+
   String role="";
 
   void fetchDetails() async {
-    var status = await PreferenceService().getString('on_boarding');
-    var status1 = await PreferenceService().getString('on_boarding1');
     var token = await PreferenceService().getString('access_token');
-    var Role = await PreferenceService().getString('role');
-
     setState(() {
-      Status = status ?? '';
-      Status1 = status1 ?? '';
       Token = token ?? '';
-      role = Role ?? "" ;
     });
+    _navigateToNextScreen();
   }
 
-  Future<void> _checkPermissions() async {
-    DeviceInfoPlugin plugin = DeviceInfoPlugin();
-    AndroidDeviceInfo android = await plugin.androidInfo;
-    Map<Permission, PermissionStatus> statuses = {
-      Permission.location: await Permission.location.status,
-      Permission.camera: await Permission.camera.status,
-      Permission.notification: await Permission.notification.status,
-    };
+  // Future<void> _checkPermissions() async {
+  //   DeviceInfoPlugin plugin = DeviceInfoPlugin();
+  //   AndroidDeviceInfo android = await plugin.androidInfo;
+  //   Map<Permission, PermissionStatus> statuses = {
+  //     Permission.location: await Permission.location.status,
+  //     Permission.camera: await Permission.camera.status,
+  //     Permission.notification: await Permission.notification.status,
+  //   };
+  //
+  //   if (android.version.sdkInt < 33) {
+  //
+  //     statuses[Permission.storage] =
+  //     await Permission.storage.status; // For Android 12 and below
+  //   } else {
+  //     statuses[Permission.photos] =
+  //     await Permission.photos.status; // For Android 13+
+  //   }
+  //
+  //   bool allPermissionsGranted = statuses.values.every((status) => status.isGranted);
+  //
+  //   setState(() {
+  //     permissions_granted = allPermissionsGranted;
+  //     print("permissions_granted:${permissions_granted}");
+  //   });
+  //     _navigateToNextScreen();
+  // }
 
-    if (android.version.sdkInt < 33) {
-
-      statuses[Permission.storage] =
-      await Permission.storage.status; // For Android 12 and below
-    } else {
-      statuses[Permission.photos] =
-      await Permission.photos.status; // For Android 13+
-    }
-
-    bool allPermissionsGranted = statuses.values.every((status) => status.isGranted);
-
-    setState(() {
-      permissions_granted = allPermissionsGranted;
-      print("permissions_granted:${permissions_granted}");
-    });
-      _navigateToNextScreen();
-  }
   void _navigateToNextScreen() {
     Future.microtask(() {
       Navigator.pushReplacement(

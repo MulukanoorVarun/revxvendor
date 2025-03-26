@@ -5,6 +5,7 @@ import 'package:revxvendor/Models/SuperAdminTestsModel.dart';
 import 'package:revxvendor/Services/ApiClient.dart';
 import '../Models/DiognosticGetCategoriesModel.dart';
 import '../Models/LoginModel.dart';
+import '../Models/VendorGetTestDetailsModel.dart';
 import '../Models/VendorGetTestsModel.dart';
 import '../components/debugPrint.dart';
 import 'api_routes.dart';
@@ -12,11 +13,12 @@ import 'api_routes.dart';
 abstract class VendorRemoteDataSource {
   Future<LoginModel?> loginApi(Map<String, dynamic> data);
   Future<SuccessModel?> postDiognosticRegister(FormData registerData);
-  Future<VendorGetTestsModel?> DiagnosticgetTests();
+  Future<VendorGetTestsModel?> DiagnosticgetTests(page);
   Future<SuccessModel?> DiagnosticDelateTest(String id);
   Future<SuccessModel?> addTestApi(List<String> testIds);
   Future<DiognosticGetCategoriesModel?> DiognosticGetCategorys();
   Future<SuperAdminTestsModel?> getSuperAdminTestsApi();
+  Future<VendorGetTestDetailsModel?> getVendorTestDetailsApi(id);
 }
 
 class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
@@ -92,9 +94,9 @@ class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
     }
   }
 
-  Future<VendorGetTestsModel?> DiagnosticgetTests() async {
+  Future<VendorGetTestsModel?> DiagnosticgetTests(page) async {
     try {
-      Response response = await ApiClient.get('${RemoteUrls.vendorGetTests}');
+      Response response = await ApiClient.get('${RemoteUrls.vendorGetTests}?page=${page}');
       if (response.statusCode == 200) {
         LogHelper.printLog('DiagnosticgetTests', response.data);
         return VendorGetTestsModel.fromJson(response.data);
@@ -138,4 +140,19 @@ class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
       return null;
     }
   }
+
+  @override
+  Future<VendorGetTestDetailsModel?> getVendorTestDetailsApi(id)async{
+    try{
+      Response response = await ApiClient.get( '${RemoteUrls.vendorGetTestsDetails}/${id}',);
+      if(response.statusCode==200){
+        LogHelper.printLog('getVendorTestDetailsApi', response.data);
+        return VendorGetTestDetailsModel.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      print("Error getVendorTestDetailsApi data: $e");
+      return null;
+    }
+    }
 }

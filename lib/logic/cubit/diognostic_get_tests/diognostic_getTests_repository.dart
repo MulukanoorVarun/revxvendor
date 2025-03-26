@@ -3,7 +3,7 @@ import '../../../Models/VendorGetTestsModel.dart';
 import '../../../data/VendorRemoteDataSource.dart';
 
 abstract class DiagnosticTestsRepository {
-  Future<VendorGetTestsModel?> VendorgetTest();
+  Future<VendorGetTestsModel?> VendorgetTest(page);
   Future<SuccessModel?> VendordelateTest(id);
   Future<SuccessModel?> addTest(List<String> testIds);
 }
@@ -16,8 +16,8 @@ class DiagnosticTestsImp implements DiagnosticTestsRepository {
     return await vendorRemoteDataSource.addTestApi(testIds);
   }
   @override
-  Future<VendorGetTestsModel?> VendorgetTest() async {
-    return await vendorRemoteDataSource.DiagnosticgetTests();
+  Future<VendorGetTestsModel?> VendorgetTest(page) async {
+    return await vendorRemoteDataSource.DiagnosticgetTests(page);
   }
 
   @override

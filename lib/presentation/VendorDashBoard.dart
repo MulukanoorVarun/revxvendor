@@ -452,147 +452,147 @@ class _VendorDashboardState extends State<VendorDashboard> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              gradient: RadialGradient(
-                                colors: [Color(0xFF88E7FD), Color(0xFF086478)],
-                                focal: Alignment.topRight,
-                                radius: 1.0,
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  'assets/polygon.png',
-                                  fit: BoxFit.contain,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  'MRI Scan',
-                                  style: TextStyle(
-                                    color: Color(0xff151515),
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  '10:30 AM',
-                                  style: TextStyle(
-                                    color: Color(0xffFFFFFF),
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              gradient: RadialGradient(
-                                colors: [Color(0xFF88E7FD), Color(0xFF086478)],
-                                focal: Alignment.topRight,
-                                radius: 1.0,
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  'assets/polygon.png',
-                                  fit: BoxFit.contain,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  'CBC',
-                                  style: TextStyle(
-                                    color: Color(0xff151515),
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  '10:30 AM',
-                                  style: TextStyle(
-                                    color: Color(0xffFFFFFF),
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 10,
-                              vertical: 10,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(16),
-                              gradient: RadialGradient(
-                                colors: [Color(0xFF88E7FD), Color(0xFF086478)],
-                                focal: Alignment.topRight,
-                                radius: 1.0,
-                              ),
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Image.asset(
-                                  'assets/polygon.png',
-                                  fit: BoxFit.contain,
-                                  width: 50,
-                                  height: 50,
-                                ),
-                                SizedBox(height: 2),
-                                Text(
-                                  'X-Ray',
-                                  style: TextStyle(
-                                    color: Color(0xff151515),
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                                SizedBox(height: 10),
-                                Text(
-                                  '10:30 AM',
-                                  style: TextStyle(
-                                    color: Color(0xffFFFFFF),
-                                    fontFamily: 'Poppins',
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 15,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(height: 10),
+                      // Row(
+                      //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //   children: [
+                      //     Container(
+                      //       padding: EdgeInsets.symmetric(
+                      //         horizontal: 10,
+                      //         vertical: 10,
+                      //       ),
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(16),
+                      //         gradient: RadialGradient(
+                      //           colors: [Color(0xFF88E7FD), Color(0xFF086478)],
+                      //           focal: Alignment.topRight,
+                      //           radius: 1.0,
+                      //         ),
+                      //       ),
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             'assets/polygon.png',
+                      //             fit: BoxFit.contain,
+                      //             width: 50,
+                      //             height: 50,
+                      //           ),
+                      //           SizedBox(height: 2),
+                      //           Text(
+                      //             'MRI Scan',
+                      //             style: TextStyle(
+                      //               color: Color(0xff151515),
+                      //               fontFamily: 'Poppins',
+                      //               fontWeight: FontWeight.w500,
+                      //               fontSize: 15,
+                      //             ),
+                      //           ),
+                      //           SizedBox(height: 10),
+                      //           Text(
+                      //             '10:30 AM',
+                      //             style: TextStyle(
+                      //               color: Color(0xffFFFFFF),
+                      //               fontFamily: 'Poppins',
+                      //               fontWeight: FontWeight.w500,
+                      //               fontSize: 15,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     Container(
+                      //       padding: EdgeInsets.symmetric(
+                      //         horizontal: 10,
+                      //         vertical: 10,
+                      //       ),
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(16),
+                      //         gradient: RadialGradient(
+                      //           colors: [Color(0xFF88E7FD), Color(0xFF086478)],
+                      //           focal: Alignment.topRight,
+                      //           radius: 1.0,
+                      //         ),
+                      //       ),
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             'assets/polygon.png',
+                      //             fit: BoxFit.contain,
+                      //             width: 50,
+                      //             height: 50,
+                      //           ),
+                      //           SizedBox(height: 2),
+                      //           Text(
+                      //             'CBC',
+                      //             style: TextStyle(
+                      //               color: Color(0xff151515),
+                      //               fontFamily: 'Poppins',
+                      //               fontWeight: FontWeight.w500,
+                      //               fontSize: 15,
+                      //             ),
+                      //           ),
+                      //           SizedBox(height: 10),
+                      //           Text(
+                      //             '10:30 AM',
+                      //             style: TextStyle(
+                      //               color: Color(0xffFFFFFF),
+                      //               fontFamily: 'Poppins',
+                      //               fontWeight: FontWeight.w500,
+                      //               fontSize: 15,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //     Container(
+                      //       padding: EdgeInsets.symmetric(
+                      //         horizontal: 10,
+                      //         vertical: 10,
+                      //       ),
+                      //       decoration: BoxDecoration(
+                      //         borderRadius: BorderRadius.circular(16),
+                      //         gradient: RadialGradient(
+                      //           colors: [Color(0xFF88E7FD), Color(0xFF086478)],
+                      //           focal: Alignment.topRight,
+                      //           radius: 1.0,
+                      //         ),
+                      //       ),
+                      //       child: Column(
+                      //         crossAxisAlignment: CrossAxisAlignment.start,
+                      //         children: [
+                      //           Image.asset(
+                      //             'assets/polygon.png',
+                      //             fit: BoxFit.contain,
+                      //             width: 50,
+                      //             height: 50,
+                      //           ),
+                      //           SizedBox(height: 2),
+                      //           Text(
+                      //             'X-Ray',
+                      //             style: TextStyle(
+                      //               color: Color(0xff151515),
+                      //               fontFamily: 'Poppins',
+                      //               fontWeight: FontWeight.w500,
+                      //               fontSize: 15,
+                      //             ),
+                      //           ),
+                      //           SizedBox(height: 10),
+                      //           Text(
+                      //             '10:30 AM',
+                      //             style: TextStyle(
+                      //               color: Color(0xffFFFFFF),
+                      //               fontFamily: 'Poppins',
+                      //               fontWeight: FontWeight.w500,
+                      //               fontSize: 15,
+                      //             ),
+                      //           ),
+                      //         ],
+                      //       ),
+                      //     ),
+                      //   ],
+                      // ),
+                      // SizedBox(height: 10),
                       Container(
                         width: w,
                         padding: EdgeInsets.all(14),

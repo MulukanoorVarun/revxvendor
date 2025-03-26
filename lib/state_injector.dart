@@ -6,6 +6,8 @@ import 'package:revxvendor/logic/cubit/super_admin_tests/super_admin_tests_repos
 import 'data/VendorRemoteDataSource.dart';
 import 'logic/cubit/diognostic_categories/diognostic_get_categories_cubit.dart';
 import 'logic/cubit/diognostic_categories/diognostic_get_category_repository.dart';
+import 'logic/cubit/diognostic_get_test_details/diagnostic_get_test_details_cubit.dart';
+import 'logic/cubit/diognostic_get_test_details/diagnostic_get_test_details_repository.dart';
 import 'logic/cubit/diognostic_get_tests/diognostic_getTests_cubit.dart';
 import 'logic/cubit/diognostic_get_tests/diognostic_getTests_repository.dart';
 import 'logic/cubit/diognostic_register/register_cubit.dart';
@@ -40,6 +42,12 @@ class StateInjector {
             vendorRemoteDataSource: context.read(),
           ),
     ),
+    RepositoryProvider<DiagnosticTestDetailsRepository>(
+      create:
+          (context) => DiagnosticTestDetailsImp(
+            vendorRemoteDataSource: context.read(),
+          ),
+    ),
   ];
 
   static final blocProviders = <BlocProvider>[
@@ -71,6 +79,11 @@ class StateInjector {
       create:
           (context) =>
               SuperAdminTestsCubit(context.read<SuperAdminTestRepository>()),
+    ),
+    BlocProvider<DiagnosticTestDetailsCubit>(
+      create:
+          (context) =>
+              DiagnosticTestDetailsCubit(context.read<DiagnosticTestDetailsRepository>()),
     ),
   ];
 }

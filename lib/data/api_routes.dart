@@ -10,4 +10,5 @@ class RemoteUrls {
   static const String vendorAddTests = 'diagnostic-admin/tests';
   static const String vendorGetCategories = 'diagnostic-admin/categories';
   static const String superAdminTests= 'diagnostic-admin/super-tests';
+  static const String vendorGetTestsDetails= 'diagnostic-admin/test-detail';
 }

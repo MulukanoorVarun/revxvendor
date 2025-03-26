@@ -15,16 +15,33 @@ class DiagnosticTestsInitially extends DiagnosticTestsState {}
 
 // Loading State
 class DiagnosticTestsLoading extends DiagnosticTestsState {}
-
-// List Loaded State
-class DiagnosticTestListLoaded extends DiagnosticTestsState {
+class DiagnosticTestsLoadingMore extends DiagnosticTestsState {
   final List<VendorGetTest> tests;
-  DiagnosticTestListLoaded(this.tests);
+  final bool hasNextPage;
+  DiagnosticTestsLoadingMore(this.tests,this.hasNextPage);
 
   @override
   List<Object?> get props => [tests];
 }
 
+// List Loaded State
+class DiagnosticTestListLoaded extends DiagnosticTestsState {
+  final List<VendorGetTest> tests;
+  final bool hasNextPage; // Tracks if more data is available
+  DiagnosticTestListLoaded(this.tests,this.hasNextPage);
+
+  @override
+  List<Object?> get props => [tests];
+}
+
+// class DiagnosticTestsLoadingMore extends DiagnosticTestsState {
+//   final List<VendorGetTest> tests;
+//   final bool hasNextPage;
+//   DiagnosticTestListLoadedMore(this.tests,this.hasNextPage);
+//
+//   @override
+//   List<Object?> get props => [testModel];
+// }
 
 // Single Test Loaded State
 class DiagnosticTestsLoaded extends DiagnosticTestsState {

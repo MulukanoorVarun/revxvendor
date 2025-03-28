@@ -69,8 +69,11 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
             AuthService.saveTokens( state.loginModel.data?.access ?? "",
                 state.loginModel.data?.refresh ?? "", state.loginModel.data?.expiryTime ?? 0);
             CustomSnackBar.show(context, state.message ?? '');
-            context.pushReplacement('/vendor_dashboard');
-
+            if(state.loginModel.data?.role=='Admin'){
+              context.pushReplacement('/vendor_dashboard');
+              print('role::${state.loginModel.data?.role=='Admin'}');
+              CustomSnackBar.show(context, state.message ?? '');
+            }
           } else {
             CustomSnackBar.show(context, state.message ?? '');
           }
@@ -232,7 +235,7 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
                   ],
 
                   SizedBox(height: 50),
-                  // Get OTP Button
+
                   SizedBox(
                     width: double.infinity,
                     height: 48,

@@ -41,15 +41,13 @@ class _VendorTestDetailsState extends State<VendorTestDetails>
           } else if (state is DiagnosticTestDetailsLoaded) {
             return Column(
               children: [
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  spacing: 10,
-                  children: [
+                Column(children: [
+                  Row(children: [
                     Container(
                       margin: EdgeInsets.only(
                           left: 16, right: 16, bottom: 16, top: 8),
                       padding:
-                          EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                      EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                       width: w * 0.25,
                       height: w * 0.3,
                       decoration: BoxDecoration(),
@@ -70,8 +68,8 @@ class _VendorTestDetailsState extends State<VendorTestDetails>
                           Text(
                             textAlign: TextAlign.start,
                             overflow: TextOverflow.ellipsis,
-                          state.vendorGetTestDetailsModel.data?.testDetails
-                                    ?.testName ??
+                            state.vendorGetTestDetailsModel.data?.testDetails
+                                ?.testName ??
                                 "",
                             maxLines: 2,
                             style: TextStyle(
@@ -103,8 +101,46 @@ class _VendorTestDetailsState extends State<VendorTestDetails>
                         ],
                       ),
                     )
+
                   ],
-                ),
+                  ),
+                  const Divider(
+                    height: 12,
+                    color: Color(0xffE6E6E6),
+                    thickness: 1,
+                  ),
+                  Row(
+                    children: [
+                      if (state.vendorGetTestDetailsModel.data?.testDetails?.fastingRequired == true) ...[
+                        Image.asset('assets/ForkKnife.png', scale: 2.5),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Fast Required',
+                          style: TextStyle(
+                            color: Color(0xff555555),
+                            fontFamily: 'Poppins',
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                      ],
+                      const Spacer(),
+                      Image.asset('assets/file.png', scale: 2.5),
+                      const SizedBox(width: 8),
+                      Text(
+                        'Reports in ${state.vendorGetTestDetailsModel.data?.testDetails?.reportsDeliveredIn ?? 0} min',
+                        style: const TextStyle(
+                          color: Color(0xff555555),
+                          fontFamily: 'Poppins',
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400,
+                        ),
+                      ),
+                    ],
+                  ),
+
+                ],),
+
                 Container(
                   decoration: BoxDecoration(
                     color: Color(0xffffffff),

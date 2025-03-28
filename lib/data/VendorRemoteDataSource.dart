@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:revxvendor/Models/SuccessModel.dart';
 import 'package:revxvendor/Models/SuperAdminTestsModel.dart';
 import 'package:revxvendor/Services/ApiClient.dart';
+import '../Models/AppointmentDetailsModel.dart';
+import '../Models/AppointmentListModel.dart';
 import '../Models/DiognosticGetCategoriesModel.dart';
 import '../Models/LoginModel.dart';
 import '../Models/VendorGetTestDetailsModel.dart';
@@ -19,6 +21,7 @@ abstract class VendorRemoteDataSource {
   Future<DiognosticGetCategoriesModel?> DiognosticGetCategorys();
   Future<SuperAdminTestsModel?> getSuperAdminTestsApi();
   Future<VendorGetTestDetailsModel?> getVendorTestDetailsApi(id);
+  Future<AppointmentListModel?> getAppointmnetListApi();
 }
 
 class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
@@ -155,4 +158,19 @@ class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
       return null;
     }
     }
+
+
+  Future<AppointmentListModel?> getAppointmnetListApi()async{
+    try{
+      Response response =await ApiClient.get('${RemoteUrls.vendorGetAppointment}');
+      if(response.statusCode==200){
+        LogHelper.printLog('getAppointmnetListApi', response.data);
+        return AppointmentListModel.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      print("Error getAppointmnetListApi data: $e");
+      return null;
+    }
+  }
 }

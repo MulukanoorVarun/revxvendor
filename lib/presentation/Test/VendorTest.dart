@@ -238,7 +238,7 @@ class _VendorTestState extends State<VendorTest> {
                                           crossAxisAlignment: CrossAxisAlignment.start,
                                           children: [
                                             Container(
-                                              width: MediaQuery.of(context).size.width * 0.6,
+                                              width: MediaQuery.of(context).size.width * 0.58,
                                               child: Column(
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [

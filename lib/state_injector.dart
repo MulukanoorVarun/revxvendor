@@ -1,5 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:revxvendor/logic/bloc/internet_status/internet_status_bloc.dart';
+import 'package:revxvendor/logic/cubit/diognostic_appointment/diognostic_get_appointment_cubit.dart';
+import 'package:revxvendor/logic/cubit/diognostic_appointment/diognostic_get_appointment_repository.dart';
 import 'package:revxvendor/logic/cubit/diognostic_register/register_repository.dart';
 import 'package:revxvendor/logic/cubit/super_admin_tests/super_admin_test_cubit.dart';
 import 'package:revxvendor/logic/cubit/super_admin_tests/super_admin_tests_repository.dart';
@@ -48,6 +50,12 @@ class StateInjector {
             vendorRemoteDataSource: context.read(),
           ),
     ),
+    RepositoryProvider<DiagnosticAppointmentListRepo>(
+      create:
+          (context) => DiagnosticAppointmentListImpl(
+            vendorRemoteDataSource: context.read(),
+          ),
+    ),
   ];
 
   static final blocProviders = <BlocProvider>[
@@ -79,6 +87,11 @@ class StateInjector {
       create:
           (context) =>
               SuperAdminTestsCubit(context.read<SuperAdminTestRepository>()),
+    ),
+    BlocProvider<DiagnosticAppointmentListCubit>(
+      create:
+          (context) =>
+              DiagnosticAppointmentListCubit(context.read<DiagnosticAppointmentListRepo>()),
     ),
     BlocProvider<DiagnosticTestDetailsCubit>(
       create:

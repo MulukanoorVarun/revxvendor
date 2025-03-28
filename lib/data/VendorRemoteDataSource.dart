@@ -21,7 +21,9 @@ abstract class VendorRemoteDataSource {
   Future<DiognosticGetCategoriesModel?> DiognosticGetCategorys();
   Future<SuperAdminTestsModel?> getSuperAdminTestsApi();
   Future<VendorGetTestDetailsModel?> getVendorTestDetailsApi(id);
-  Future<AppointmentListModel?> getAppointmnetListApi();
+  Future<AppointmentListModel?> getAppointmnetListApi(status);
+  Future<SuccessModel?> deleteAppointment(id);
+  Future<SuccessModel?> updateStatusAppointment(id,status);
 }
 
 class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
@@ -160,9 +162,9 @@ class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
     }
 
 
-  Future<AppointmentListModel?> getAppointmnetListApi()async{
+  Future<AppointmentListModel?> getAppointmnetListApi(status)async{
     try{
-      Response response =await ApiClient.get('${RemoteUrls.vendorGetAppointment}');
+      Response response =await ApiClient.get('${RemoteUrls.vendorGetAppointment}?status=${status}');
       if(response.statusCode==200){
         LogHelper.printLog('getAppointmnetListApi', response.data);
         return AppointmentListModel.fromJson(response.data);
@@ -170,6 +172,32 @@ class VendorRemoteDataSourceImpl implements VendorRemoteDataSource {
       return null;
     } catch (e) {
       print("Error getAppointmnetListApi data: $e");
+      return null;
+    }
+  }
+  Future<SuccessModel?> deleteAppointment(id)async{
+    try{
+      Response response =await ApiClient.delete('${RemoteUrls.vendorDeleteAppointment}/${id}');
+      if(response.statusCode==200){
+        LogHelper.printLog('deleteAppointment', response.data);
+        return SuccessModel.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      print("Error deleteAppointment data: $e");
+      return null;
+    }
+  }
+  Future<SuccessModel?> updateStatusAppointment(id,status)async{
+    try{
+      Response response =await ApiClient.put('${RemoteUrls.vendorDeleteAppointment}/${id}?status=${status}');
+      if(response.statusCode==200){
+        LogHelper.printLog('updateStatusAppointment', response.data);
+        return SuccessModel.fromJson(response.data);
+      }
+      return null;
+    } catch (e) {
+      print("Error updateStatusAppointment data: $e");
       return null;
     }
   }

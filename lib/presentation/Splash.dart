@@ -86,7 +86,7 @@ class _SplashState extends State<Splash> with SingleTickerProviderStateMixin {
     Future.microtask(() {
       if(Token==''){
         context.pushReplacement('/login');
-      }else{
+      }else {
         context.pushReplacement('/vendor_dashboard');
       }
     });

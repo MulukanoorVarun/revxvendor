@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:revxvendor/Models/SuccessModel.dart';
 import '../../../Models/AppointmentDetailsModel.dart';
 import '../../../Models/AppointmentListModel.dart';
 
@@ -24,6 +25,14 @@ class DiagnosticAppointmentListLoaded extends DiagnosticAppointmentListState {
 
   @override
   List<Object?> get props => [appointmentListModel];
+}
+class DiagnosticAppointmentSuccess extends DiagnosticAppointmentListState {
+  final SuccessModel successModel;
+
+  const DiagnosticAppointmentSuccess(this.successModel);
+
+  @override
+  List<Object?> get props => [successModel];
 }
 
 class DiagnosticAppointmentListError extends DiagnosticAppointmentListState {

@@ -1,6 +1,6 @@
 class RemoteUrls {
-  // static const String baseUrl = 'https://revx.ozrit.in/';
-  static const String baseUrl = 'http://192.168.0.20:8080/';
+  static const String baseUrl = 'https://revx.ozrit.in/';
+  // static const String baseUrl = 'http://192.168.0.20:8080/';
   static const String userLogin = 'auth/login';
   static const String vendorRegister = 'auth/diagnostic-register';
   static const String vendorGetTests = 'diagnostic-admin/tests';
@@ -12,4 +12,5 @@ class RemoteUrls {
   static const String superAdminTests= 'diagnostic-admin/super-tests';
   static const String vendorGetTestsDetails= 'diagnostic-admin/test-detail';
   static const String vendorGetAppointment= 'diagnostic-admin/appointments';
+  static const String vendorDeleteAppointment= 'diagnostic-admin/appointment-detail';
 }

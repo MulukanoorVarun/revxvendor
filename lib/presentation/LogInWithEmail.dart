@@ -70,9 +70,12 @@ class _LogInWithEmailState extends State<LogInWithEmail> {
                 state.loginModel.data?.refresh ?? "", state.loginModel.data?.expiryTime ?? 0);
             CustomSnackBar.show(context, state.message ?? '');
             if(state.loginModel.data?.role=='Admin'){
+              CustomSnackBar.show(context, state.message ?? '');
               context.pushReplacement('/vendor_dashboard');
               print('role::${state.loginModel.data?.role=='Admin'}');
-              CustomSnackBar.show(context, state.message ?? '');
+
+            }else{
+              CustomSnackBar.show(context, 'Please log in via Admin Credentials Only');
             }
           } else {
             CustomSnackBar.show(context, state.message ?? '');

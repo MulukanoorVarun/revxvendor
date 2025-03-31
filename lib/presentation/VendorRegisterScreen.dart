@@ -212,10 +212,28 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
   }
 
   TimeOfDay? _selectedTime;
+  // Future<void> _selectTime(BuildContext context) async {
+  //   final TimeOfDay? picked = await showTimePicker(
+  //     context: context,
+  //     initialTime: TimeOfDay.now(),
+  //   );
+  //   if (picked != null && picked != _selectedTime) {
+  //     setState(() {
+  //       _selectedTime = picked;
+  //     });
+  //   }
+  // }
+
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? picked = await showTimePicker(
       context: context,
       initialTime: TimeOfDay.now(),
+      builder: (BuildContext context, Widget? child) {
+        return MediaQuery(
+          data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+          child: child!,
+        );
+      },
     );
     if (picked != null && picked != _selectedTime) {
       setState(() {
@@ -223,6 +241,14 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
       });
     }
   }
+
+
+  String _formatTime(TimeOfDay time) {
+    final int hour = time.hour;
+    final int minute = time.minute;
+    return '${hour.toString().padLeft(2, '0')}:${minute.toString().padLeft(2, '0')}';
+  }
+
 
   List<String> selectedDays = [];
   MultiSelectController<WeekDays> _dayscontroller = MultiSelectController<WeekDays>();
@@ -442,12 +468,13 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                                 readOnly: true,
                                 onTap: () async {
                                   await _selectTime(context);
-
                                   if (_selectedTime != null) {
                                     setState(() {
                                       _validatestartTiming = '';
                                       startTimeController.text =
                                           _selectedTime!.format(context);
+                                      startTimeController.text = _formatTime(_selectedTime!);
+
                                     });
                                   }
                                 },
@@ -521,8 +548,9 @@ class _VendorRegisterScreenState extends State<VendorRegisterScreen> {
                                   if (_selectedTime != null) {
                                     setState(() {
                                       _validatecloseTiming = '';
-                                      endController.text =
-                                          _selectedTime!.format(context);
+                                      // endController.text =
+                                      //     _selectedTime!.format(context);
+                                      endController.text = _formatTime(_selectedTime!);
                                     });
                                   }
                                 },

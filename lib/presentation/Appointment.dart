@@ -80,7 +80,6 @@ class _AppointmentsState extends State<Appointments> with TickerProviderStateMix
         if (state is DiagnosticAppointmentListLoading) {
           return Container(color: Colors.white, child: _shimmerList());
         }
-
         Widget bodyContent;
         if (state is DiagnosticAppointmentListLoaded) {
           final appointmentData = state.appointmentListModel.appointmentlist;
